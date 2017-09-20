@@ -51,7 +51,7 @@ RUN cd /code/MG5_aMC_v2_6_0 && \
 
 RUN yum -y install python2-pip python-matplotlib && pip install jupyter
 
-RUN yum -y install python2-jsmva
+RUN yum -y install python2-jsmva root-tmva-gui root-tmva-python ImageMagick
 
 # RUN  echo "pythia8_path = /code/MG5_aMC_v2_6_0/HEPTools/pythia8" >> /code/MG5_aMC_v2_6_0/input/mg5_configuration.txt
 
