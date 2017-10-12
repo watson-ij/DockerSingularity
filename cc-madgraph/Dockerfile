@@ -53,6 +53,19 @@ RUN yum -y install python2-pip python-matplotlib && pip install jupyter
 
 RUN yum -y install python2-jsmva root-tmva-gui root-tmva-python ImageMagick
 
+RUN yum -y install cmake
+
+RUN cd /code/MG5_aMC_v2_6_0 && \
+    (echo "install cuttools" | ROOTSYS=/usr PATH=/usr/bin:$PATH ./bin/mg5_aMC) &&\
+    (echo "install iregi" | ROOTSYS=/usr PATH=/usr/bin:$PATH ./bin/mg5_aMC) &&\
+    (echo "install ninja" | ROOTSYS=/usr PATH=/usr/bin:$PATH ./bin/mg5_aMC) &&\
+    (echo "install collier" | ROOTSYS=/usr PATH=/usr/bin:$PATH ./bin/mg5_aMC) &&\
+    (echo "install golem" | ROOTSYS=/usr PATH=/usr/bin:$PATH ./bin/mg5_aMC)
+
+RUN cd /code/MG5_aMC_v2_6_0 && \
+    (printf "generate p p > u u~ [QCD]\noutput ppgg\n" | ROOTSYS=/usr PATH=/usr/bin:$PATH ./bin/mg5_aMC) &&\
+    rm -rf ppgg
+
 # RUN  echo "pythia8_path = /code/MG5_aMC_v2_6_0/HEPTools/pythia8" >> /code/MG5_aMC_v2_6_0/input/mg5_configuration.txt
 
 CMD ["/code/MG5_aMC_v2_6_0/bin/mg5_aMC"]

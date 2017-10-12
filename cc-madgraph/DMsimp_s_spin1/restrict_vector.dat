@@ -19,8 +19,8 @@ Block MASS
    23 9.118760e+01 # MZ 
    25 1.250000e+02 # MH 
   5000001 5.000000e+02 # MY1 
-  5000511 1.000000e+01 # MXr 
-  5000512 1.000000e+01 # MXc 
+  5000511 1.500000e+02 # MXr 
+  5000512 1.500000e+02 # MXc 
   5000521 1.500000e+02 # MXd 
 ##  Not dependent paramater.
 ## Those values should be edited following analytical the 
