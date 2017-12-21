@@ -63,9 +63,26 @@ RUN cd /code/MG5_aMC_v2_6_0 && \
     (echo "install golem" | ROOTSYS=/usr PATH=/usr/bin:$PATH ./bin/mg5_aMC)
 
 RUN cd /code/MG5_aMC_v2_6_0 && \
-    (printf "generate p p > u u~ [QCD]\noutput ppgg\n" | ROOTSYS=/usr PATH=/usr/bin:$PATH ./bin/mg5_aMC) &&\
+    (printf "generate g g > u u~ [QCD]\noutput ppgg\n" | ROOTSYS=/usr PATH=/usr/bin:$PATH ./bin/mg5_aMC) &&\
     rm -rf ppgg
 
 # RUN  echo "pythia8_path = /code/MG5_aMC_v2_6_0/HEPTools/pythia8" >> /code/MG5_aMC_v2_6_0/input/mg5_configuration.txt
+
+RUN pip install tensorflow keras
+RUN pip install scikit-learn statsmodels
+
+# RUN yum -y install bzip2 file
+
+# RUN cd /code && wget http://www.hepforge.org/archive/sherpa/SHERPA-MC-2.2.4.tar.gz &&\
+#     tar xfz SHERPA-MC-2.2.4.tar.gz && cd SHERPA-MC-2.2.4 &&\
+#     ./configure --enable-hepmc2=/code/MG5_aMC_v2_6_0/HEPTools/hepmc --enable-lhapdf=/usr --enable-fastjet=/usr --with-sqlite3=install &&\
+#     make install && cd .. && rm -rf SHERPA-MC-2.2.4.tar.gz SHERPA-MC-2.2.4
+
+RUN yum -y install git
+
+RUN cd /code && git clone https://github.com/nim-lang/Nim && cd Nim && git clone --depth 1 git://github.com/nim-lang/csources && cd csources && sh build.sh && cd .. && bin/nim c koch && ./koch boot -d:release && ./koch tools && ./koch nimble && rm -rf csources && ln -sf /code/Nim/bin/* /usr/bin && chmod go+x /code/Nim/bin/*
+
+# For ROOT TBrowser, etc.
+RUN yum -y install mesa-dri-drivers
 
 CMD ["/code/MG5_aMC_v2_6_0/bin/mg5_aMC"]

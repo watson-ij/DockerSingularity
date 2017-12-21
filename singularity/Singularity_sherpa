@@ -1,0 +1,10 @@
+Bootstrap: docker
+From: localhost:5000/sherpa/sherpa
+IncludeCmd: no
+
+%post
+	# Some setup to allow everyone to run jupyter notebooks
+	# chmod o+rwx /run/user
+
+%runscript
+	exec /code/SHERPA-MC-2.2.4/bin/Sherpa $@

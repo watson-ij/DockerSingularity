@@ -1,0 +1,13 @@
+Bootstrap: docker
+From: localhost:5000/madgraph/madgraph
+IncludeCmd: no
+
+%post
+	# Some setup to allow everyone to run jupyter notebooks
+	chmod o+rw /usr/lib64/python2.7/site-packages/.wh*
+	chmod o+rw /usr/lib/python2.7/site-packages/.wh*
+	# chmod o+rwx /run/user
+
+%runscript
+	exec /code/MG5_aMC_v2_6_0/bin/mg5_aMC
+
